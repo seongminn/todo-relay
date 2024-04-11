@@ -1,6 +1,6 @@
 import { graphql, useFragment } from 'react-relay';
 
-import { useFlow } from '~/libs/stackflow';
+import { cn } from '~/libs/utils';
 
 import { TodoItem_todo$key } from './__generated__/TodoItem_todo.graphql';
 
@@ -10,13 +10,21 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const data = useFragment(TodoItemFragment, todo);
-  const { push } = useFlow();
 
   return (
-    <li>
-      <button onClick={() => push('Todo', { id: data.id })}>
+    <li className="flex items-center gap-2">
+      <input
+        type="checkbox"
+        defaultChecked={data.attributes?.completed || false}
+      />
+      <span
+        className={cn(
+          'flex-1',
+          data.attributes?.completed && 'line-through text-gray-400',
+        )}
+      >
         {data.attributes?.content}
-      </button>
+      </span>
     </li>
   );
 };
