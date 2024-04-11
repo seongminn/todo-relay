@@ -1,26 +1,13 @@
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
-import { useFlow } from '~/libs/stackflow';
-
 import type { TodoListQuery as TodoListQueryType } from './__generated__/TodoListQuery.graphql';
+import TodoItem from './TodoItem';
 
 const TodoList = () => {
   const data = useLazyLoadQuery<TodoListQueryType>(TodosQuery, {});
   const todos = data.todos?.data;
 
-  const { push } = useFlow();
-
-  return (
-    <ul>
-      {todos?.map(todo => (
-        <li key={todo.id}>
-          <button onClick={() => push('Todo', { id: todo.id })}>
-            {todo.attributes?.content}
-          </button>
-        </li>
-      ))}
-    </ul>
-  );
+  return <ul>{todos?.map(todo => <TodoItem key={todo.id} todo={todo} />)}</ul>;
 };
 
 export default TodoList;
@@ -30,10 +17,7 @@ const TodosQuery = graphql`
     todos {
       data {
         id
-        attributes {
-          content
-          completed
-        }
+        ...TodoItem_todo
       }
     }
   }
