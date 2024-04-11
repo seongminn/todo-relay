@@ -17,11 +17,13 @@
 		"@stackflow/plugin-history-sync": "^1.4.0",
 		"@stackflow/plugin-renderer-basic": "^1.1.8",
 		"@stackflow/react": "^1.1.8",
+		"clsx": "^2.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-relay": "^16.2.0",
 		"react-relay-network-modern": "^6.2.2",
-		"relay-runtime": "^16.2.0"
+		"relay-runtime": "^16.2.0",
+		"tailwind-merge": "^2.2.2"
 	},
 	"devDependencies": {
 		"@types/node": "^20.12.7",
