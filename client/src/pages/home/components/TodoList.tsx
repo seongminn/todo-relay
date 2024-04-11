@@ -22,7 +22,7 @@ const TodosQuery = graphql`
     todos {
       data {
         id
-        ...TodoItem_todo
+        ...TodoItemFragment
       }
     }
   }

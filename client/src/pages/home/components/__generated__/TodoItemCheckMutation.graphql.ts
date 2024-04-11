@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<233ff83e33bd827ab3e3f97a420b2a66>>
+ * @generated SignedSource<<13d33fdf03c0686b66117288986d1b97>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,43 +8,67 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConcreteRequest, Query } from 'relay-runtime';
+import { ConcreteRequest, Mutation } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type TodoListQuery$variables = Record<PropertyKey, never>;
-export type TodoListQuery$data = {
-  readonly todos: {
-    readonly data: ReadonlyArray<{
-      readonly id: string | null | undefined;
+export type TodoInput = {
+  completed?: boolean | null | undefined;
+  content?: string | null | undefined;
+};
+export type TodoItemCheckMutation$variables = {
+  data: TodoInput;
+  id: string;
+};
+export type TodoItemCheckMutation$data = {
+  readonly updateTodo: {
+    readonly data: {
       readonly " $fragmentSpreads": FragmentRefs<"TodoItemFragment">;
-    }>;
+    } | null | undefined;
   } | null | undefined;
 };
-export type TodoListQuery = {
-  response: TodoListQuery$data;
-  variables: TodoListQuery$variables;
+export type TodoItemCheckMutation = {
+  response: TodoItemCheckMutation$data;
+  variables: TodoItemCheckMutation$variables;
 };
 
 const node: ConcreteRequest = (function(){
 var v0 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-};
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "data"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "id"
+},
+v2 = [
+  {
+    "kind": "Variable",
+    "name": "data",
+    "variableName": "data"
+  },
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "id"
+  }
+];
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
-    "name": "TodoListQuery",
+    "name": "TodoItemCheckMutation",
     "selections": [
       {
         "alias": null,
-        "args": null,
-        "concreteType": "TodoEntityResponseCollection",
+        "args": (v2/*: any*/),
+        "concreteType": "TodoEntityResponse",
         "kind": "LinkedField",
-        "name": "todos",
+        "name": "updateTodo",
         "plural": false,
         "selections": [
           {
@@ -53,9 +77,8 @@ return {
             "concreteType": "TodoEntity",
             "kind": "LinkedField",
             "name": "data",
-            "plural": true,
+            "plural": false,
             "selections": [
-              (v0/*: any*/),
               {
                 "args": null,
                 "kind": "FragmentSpread",
@@ -68,21 +91,24 @@ return {
         "storageKey": null
       }
     ],
-    "type": "Query",
+    "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      (v1/*: any*/),
+      (v0/*: any*/)
+    ],
     "kind": "Operation",
-    "name": "TodoListQuery",
+    "name": "TodoItemCheckMutation",
     "selections": [
       {
         "alias": null,
-        "args": null,
-        "concreteType": "TodoEntityResponseCollection",
+        "args": (v2/*: any*/),
+        "concreteType": "TodoEntityResponse",
         "kind": "LinkedField",
-        "name": "todos",
+        "name": "updateTodo",
         "plural": false,
         "selections": [
           {
@@ -91,9 +117,15 @@ return {
             "concreteType": "TodoEntity",
             "kind": "LinkedField",
             "name": "data",
-            "plural": true,
+            "plural": false,
             "selections": [
-              (v0/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
+                "storageKey": null
+              },
               {
                 "alias": null,
                 "args": null,
@@ -128,16 +160,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6b103fc9427dba9b1c762d60b9fff06e",
+    "cacheID": "1b6f929cf3ac29198fc908725044da07",
     "id": null,
     "metadata": {},
-    "name": "TodoListQuery",
-    "operationKind": "query",
-    "text": "query TodoListQuery {\n  todos {\n    data {\n      id\n      ...TodoItemFragment\n    }\n  }\n}\n\nfragment TodoItemFragment on TodoEntity {\n  id\n  attributes {\n    content\n    completed\n  }\n}\n"
+    "name": "TodoItemCheckMutation",
+    "operationKind": "mutation",
+    "text": "mutation TodoItemCheckMutation(\n  $id: ID!\n  $data: TodoInput!\n) {\n  updateTodo(id: $id, data: $data) {\n    data {\n      ...TodoItemFragment\n      id\n    }\n  }\n}\n\nfragment TodoItemFragment on TodoEntity {\n  id\n  attributes {\n    content\n    completed\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "0f360604018fabc69ace0513a4597e1e";
+(node as any).hash = "c0d137c3f15205446c46607e0baa850e";
 
 export default node;
